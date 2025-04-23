@@ -1,11 +1,14 @@
 [package]
-name = "contract"
-version = "1.0.0"
+name = "Scholarship"
+version = "2.0.0"
+upgrade_policy= 'compatible'
+
 authors = []
 
 [addresses]
-
+my_add='0x28f7aca13358cee8f8e686c3bca7dcde17a74e3bee7b0ab73281c372b2d28ec9'
 [dev-addresses]
+my_add='0x28f7aca13358cee8f8e686c3bca7dcde17a74e3bee7b0ab73281c372b2d28ec9'
 
 [dependencies.AptosFramework]
 git = "https://github.com/aptos-labs/aptos-framework.git"

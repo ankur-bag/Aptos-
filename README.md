@@ -1,21 +1,56 @@
-## Project Title
- Aptos SimpleVoting - A Decentralized Voting Smart Contract
+# Blockchain-Based Scholarship Distribution System
 
-## Project Description
-SimpleVoting is a decentralized voting system implemented on the Aptos blockchain. It allows users to create voting polls with multiple options and enables participants to cast their votes securely and transparently. The system ensures that each voter can only vote once per poll and that the voting process is tamper-proof.
+A decentralized application (dApp) built on the Aptos blockchain for transparent and efficient scholarship distribution in the education sector.
 
-## Project Vision
-The vision of SimpleVoting is to provide a secure, transparent, and decentralized platform for conducting polls and elections. By leveraging blockchain technology, SimpleVoting aims to eliminate fraud, ensure fairness, and empower communities to make collective decisions efficiently.
+## Overview
 
-## Future Scope
-- **Result Analysis**: Add functionality to calculate and display poll results.
-- **Poll Expiry**: Introduce expiration dates for polls to automatically close voting after a set period.
-- **Anonymous Voting**: Implement zero-knowledge proofs to ensure voter anonymity.
-- **Multi-Signature Polls**: Enable multi-signature approvals for poll creation.
-- **Integration with Wallets**: Provide seamless integration with popular Aptos wallets for user convenience.
+This project implements a blockchain-based solution for managing and distributing educational scholarships. It leverages smart contracts to ensure transparent, efficient, and tamper-proof scholarship allocation.
 
-## Contract Details
-- **Module Address**: `0x28f7aca13358cee8f8e686c3bca7dcde17a74e3bee7b0ab73281c372b2d28ec9`
-- **Transaction Hash**: `0xe9b390a9830a4e743b0e036eb49b18c800f8590547d512e46482a1fefe1732d8"
-![alt text](image.png)
-    
+## Features
+
+- Smart contract-based scholarship distribution
+- Transparent selection process
+- Automated fund disbursement
+- Student verification system
+- Real-time tracking of scholarship status
+- Immutable record keeping
+
+## Technical Stack
+
+- Blockchain: Aptos
+- Smart Contract Language: Move
+- Version: 2.0.0
+
+## Prerequisites
+
+- Aptos CLI
+- Move Compiler
+- Node.js (for frontend, if applicable)
+
+## Getting Started
+
+1. Clone the repository
+2. Install dependencies
+3. Configure your Aptos wallet
+4. Deploy smart contracts
+
+## Smart Contract Structure
+
+The smart contracts handle:
+- Scholarship creation and management
+- Student verification
+- Fund distribution
+- Academic record verification
+
+## Contributing
+
+Contributions are welcome! Please read our contributing guidelines before submitting pull requests.
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Smart contract details
+![alt text](image-1.png)
+MOdule no.: 0x28f7aca13358cee8f8e686c3bca7dcde17a74e3bee7b0ab73281c372b2d28ec9
+Transaction hash: 0xb2c0359695def7c8f6550a7b8f2cee4fee4b2f0761086cc978b94d1623ce6993

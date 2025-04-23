@@ -1,71 +1,34 @@
-module 0x28f7aca13358cee8f8e686c3bca7dcde17a74e3bee7b0ab73281c372b2d28ec9::SimpleVoting {
-    use aptos_framework::account;
+module  0x28f7aca13358cee8f8e686c3bca7dcde17a74e3bee7b0ab73281c372b2d28ec9::ScholarshipDistribution 
+   {
+
     use aptos_framework::signer;
-    use std::vector;
+    use aptos_framework::coin;
+    use aptos_framework::aptos_coin::AptosCoin;
 
-    /// Error codes
-    const E_ALREADY_VOTED: u64 = 1;
-    const E_VOTING_CLOSED: u64 = 2;
-
-    /// Structure to store voting information
-    struct VotingPoll has key {
-        creator: address,
-        options: vector<vector<u8>>,
-        votes: vector<u64>,
-        voters: vector<address>,
-        is_active: bool
+    /// Struct to represent a scholarship fund
+    struct ScholarshipFund has store, key {
+        total_amount: u64,
     }
 
-    /// Creates a new voting poll with the specified options
-    public entry fun create_poll(
-        creator: &signer,
-        options: vector<vector<u8>>
-    ) {
-        let creator_addr = signer::address_of(creator);
-        let options_count = vector::length(&options);
-        let votes = vector::empty<u64>();
-        
-        // Initialize vote count for each option to 0
-        let i = 0;
-        while (i < options_count) {
-            vector::push_back(&mut votes, 0);
-            i = i + 1;
-        };
+    /// Function to register a scholarship fund by an institute
+    public fun register_scholarship(institute: &signer, amount: u64) {
+        let deposit = coin::withdraw<AptosCoin>(institute, amount);
+        coin::deposit<AptosCoin>(signer::address_of(institute), deposit);
 
-        let poll = VotingPoll {
-            creator: creator_addr,
-            options,
-            votes,
-            voters: vector::empty<address>(),
-            is_active: true
+        let fund = ScholarshipFund {
+            total_amount: amount,
         };
-
-        move_to(creator, poll);
+        move_to(institute, fund);
     }
 
-    /// Cast a vote for a specific option in the poll
-    public entry fun vote(
-        voter: &signer,
-        poll_creator: address,
-        option_index: u64
-    ) acquires VotingPoll {
-        let poll = borrow_global_mut<VotingPoll>(poll_creator);
-        let voter_addr = signer::address_of(voter);
-        
-        // Check if poll is still active
-        assert!(poll.is_active, E_VOTING_CLOSED);
-        
-        // Check if voter has already voted
-        let i = 0;
-        let voters_len = vector::length(&poll.voters);
-        while (i < voters_len) {
-            assert!(vector::borrow(&poll.voters, i) != &voter_addr, E_ALREADY_VOTED);
-            i = i + 1;
-        };
-        
-        // Record the vote
-        let current_votes = vector::borrow_mut(&mut poll.votes, option_index);
-        *current_votes = *current_votes + 1;
-        vector::push_back(&mut poll.voters, voter_addr);
+    /// Function to disburse funds to a student
+    public fun disburse_scholarship(institute: &signer, student: address, amount: u64) acquires ScholarshipFund {
+        let fund = borrow_global_mut<ScholarshipFund>(signer::address_of(institute));
+        assert!(fund.total_amount >= amount, 1); // Ensure enough funds
+
+        let payout = coin::withdraw<AptosCoin>(institute, amount);
+        coin::deposit<AptosCoin>(student, payout);
+
+        fund.total_amount = fund.total_amount - amount;
     }
 }
